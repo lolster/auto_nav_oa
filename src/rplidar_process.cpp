@@ -9,8 +9,7 @@
 #include <std_msgs/Float32MultiArray.h>
 #include <vector>
 
-int main(int argc, char **argv)
-{   
+int main(int argc, char **argv) {   
     // Initialise ros node and advertise to roscore
     ros::init(argc, argv, "rplidar_process");
 
@@ -25,16 +24,16 @@ int main(int argc, char **argv)
     // The setpoint publishing rate MUST be faster than 2Hz
     ros::Rate rate(20.0);
 
-	std_msgs::Float32MultiArray ob_map;
+    std_msgs::Float32MultiArray ob_map;
 
-	std::vector<float> dummy_data(360);
-	std::fill(dummy_data.begin(), dummy_data.end(), -1);
+    std::vector<float> dummy_data(360);
+    std::fill(dummy_data.begin(), dummy_data.end(), -1);
 
     ob_map.data = dummy_data;
 
-    while(ros::ok()){
-		// Publish the current pose
-		oa_pub.publish(ob_map);
+    while(ros::ok()) {
+	// Publish the current pose
+	oa_pub.publish(ob_map);
 
         ros::spinOnce();
         rate.sleep();
