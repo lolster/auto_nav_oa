@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(auto_nav_oa)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -201,4 +201,4 @@ include_directories(
 # rplidar_process node
 add_executable(rplidar_process src/rplidar_process.cpp)
 target_link_libraries(rplidar_process ${catkin_LIBRARIES})
-add_dependencies(rplidar_process auto_nav_oa_generate_messages_cpp)
+# add_dependencies(rplidar_process auto_nav_oa_generate_messages_cpp)
