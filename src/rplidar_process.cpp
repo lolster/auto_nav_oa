@@ -16,6 +16,7 @@
 // Returned to client (published for use)
 std_msgs::Float32MultiArray ob_map;
 float max_range;
+float ob_safety_buffer;
 void rplidar_sub_cb(const sensor_msgs::LaserScan::ConstPtr& msg) {
 	if(!msg->ranges.empty()) {
 		std::vector<float> data(msg->ranges.size());
@@ -26,7 +27,7 @@ void rplidar_sub_cb(const sensor_msgs::LaserScan::ConstPtr& msg) {
 			ob_map.data.end(), 
 			ob_map.data.begin(), 
 			[](float dist) -> float {
-				return (dist > 0 && dist <= max_range) ? dist : std::numeric_limits<float>::infinity();
+				return (dist > 0 && dist <= max_range) ? std::fdim(dist - ob_safety_buffer)  : std::numeric_limits<float>::infinity();
 			}
 		);
 	}
@@ -41,7 +42,7 @@ int main(int argc, char **argv) {
 
 	// Get params for max range considered for obstacles
 	nh.param<float>("max_obstacle_range", max_range, 5.0f);
-
+	nh.param<float>("obstacle_safety_buffer", ob_safety_buffer, 0.0f);
 	// PUBLISHER
 	// To publish the pre processed RPLidar value float32[]
 	ros::Publisher oa_pub = nh.advertise<std_msgs::Float32MultiArray>
