@@ -11,6 +11,7 @@
 #include <sensor_msgs/LaserScan.h>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 // "Obstacle map" message
 // Returned to client (published for use)
@@ -27,7 +28,7 @@ void rplidar_sub_cb(const sensor_msgs::LaserScan::ConstPtr& msg) {
 			ob_map.data.end(), 
 			ob_map.data.begin(), 
 			[](float dist) -> float {
-				return (dist > 0 && dist <= max_range) ? std::fdim(dist - ob_safety_buffer)  : std::numeric_limits<float>::infinity();
+				return (dist > 0 && dist <= max_range) ? std::fdim(dist, ob_safety_buffer)  : std::numeric_limits<float>::infinity();
 			}
 		);
 	}
