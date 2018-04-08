@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 
 	// Get params for max range considered for obstacles
 	nh.param<float>("max_obstacle_range", max_range, 5.0f);
-	nh.param<float>("obstacle_safety_buffer", ob_safety_buffer, 0.0f);
+	nh.param<float>("obstacle_safety_buffer", ob_safety_buffer, 0.3f);
 	// PUBLISHER
 	// To publish the pre processed RPLidar value float32[]
 	ros::Publisher oa_pub = nh.advertise<std_msgs::Float32MultiArray>
