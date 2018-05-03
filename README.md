@@ -1,5 +1,5 @@
 # Auto_Nav_OA
-Obstacle avoidance node, used to publish pre-processed  RPLidar values
+Obstacle Avoidance module, used to publish pre-processed RPLidar values and enables obstacle avoidance features.
 
 ## Description
 This module/node is responsible for obstacle detection capabilities. This node, under the 
